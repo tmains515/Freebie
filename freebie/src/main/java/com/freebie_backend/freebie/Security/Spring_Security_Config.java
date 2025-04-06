@@ -14,9 +14,9 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class Spring_Security_Config {
-    
+
     @Autowired
-    UserDetailsService userDetailsService;
+    FreebieUserDetailsService freebieUserDetailsService;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -25,6 +25,7 @@ public class Spring_Security_Config {
                 .requestMatchers("/api/test/**").permitAll() // Allow unauthenticated access
                 .anyRequest().authenticated() // Secure all other endpoints
             )
+            .userDetailsService(freebieUserDetailsService)
             .formLogin(form -> form
                 .loginPage("/login")
                 .permitAll()
@@ -39,7 +40,7 @@ public class Spring_Security_Config {
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-        daoAuthenticationProvider.setUserDetailsService((org.springframework.security.core.userdetails.UserDetailsService) userDetailsService);
+        daoAuthenticationProvider.setUserDetailsService((org.springframework.security.core.userdetails.UserDetailsService) freebieUserDetailsService);
         daoAuthenticationProvider.setPasswordEncoder(bCryptPasswordEncoder());
         return daoAuthenticationProvider;
     }

@@ -1,24 +1,22 @@
-package com.freebie_backend.freebie.Models;
+package com.freebie_backend.freebie.DTOs;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
-@Entity
-@Table(name = "users")
-public class User {
-
-    @Id
-    @Column(name = "username")
+public class UserRegistrationDto {
+    @NotBlank
+    @Size(min = 3, max = 50)
     private String username;
     
-    @Column(name = "user_email", nullable = false)
+    @NotBlank
+    @Email
     private String email;
-    
-    @Column(name = "password", nullable = false)
-    private String password;
 
+    @NotBlank
+    @Size(min = 6)
+    private String password;
+    
     public String getUsername() {
         return username;
     }
