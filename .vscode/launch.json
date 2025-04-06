@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-FreebieApplication<freebie>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.freebie_backend.freebie.FreebieApplication",
+            "projectName": "freebie",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
