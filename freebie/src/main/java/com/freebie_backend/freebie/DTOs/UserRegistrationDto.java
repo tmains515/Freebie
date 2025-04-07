@@ -14,7 +14,7 @@ public class UserRegistrationDto {
     private String email;
 
     @NotBlank
-    @Size(min = 6)
+    @Size(min = 2)
     private String password;
     
     public String getUsername() {
