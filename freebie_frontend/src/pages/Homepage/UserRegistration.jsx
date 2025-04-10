@@ -9,7 +9,6 @@ const UserRegistration = () => {
     });
 
     const infoChange = (e) => {
-        console.log(e.target.value)
         const {name, value} = e.target;
         setFormData( (prev) => ({
             ...prev,
@@ -17,33 +16,44 @@ const UserRegistration = () => {
         }))
     }
 
-    const submit = async() =>{
-        console.log(formData)
-        if (formData.password !== formData.confirmPassword){
-            console.log('fart')
-            return "Passwords do not match"
+    const submit = async () => {
+        console.log(formData);
+    
+        if (formData.password !== formData.confirmPassword) {
+            alert("Passwords do not match");
+            return;
         }
-
-        await fetch('http://localhost:8080/user/register', {
-            method: "POST",
-            credentials: "include",
-            headers: {
-                "Content-Type":"application/json",
-            },
-            body:JSON.stringify({
-                username: formData.username,
-                password: formData.password,
-                email: formData.email,
-            })
-        })
-        .then( (response) => {
-            if (!response.ok){
-                throw new Error("Something went wrong");
+    
+        try {
+            const response = await fetch("http://localhost:8080/user/register", {
+                method: "POST",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    username: formData.username,
+                    password: formData.password,
+                    email: formData.email,
+                }),
+            });
+    
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`Server Error: ${response.status} - ${errorText}`);
             }
-            console.log(response.status)
-            data = response.json()
-        })
-    }
+    
+            const data = await response.text(); // or response.json() if your backend returns JSON
+            console.log("Registration successful:", data);
+            alert("Registration successful!");
+    
+    
+        } catch (err) {
+            console.error("Registration failed:", err);
+            alert("Failed to register: " + err.message);
+        }
+    };
+    
 
     return (
         <main className="flex-grow flex flex-col justify-center items-center">

@@ -1,6 +1,12 @@
 import leftArrow from '../../assets/Homepage/leftArrow.png'
 
 const login = ( {setShowHome, setShowLogin} ) => {
+
+    const submit = () => {
+
+    }
+
+
     return (
 
         <main className="flex-grow flex flex-col justify-center items-center">

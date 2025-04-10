@@ -41,5 +41,11 @@ public class UserRegistrationDto {
         this.password = password;
     }
 
+    @Override
+    public String toString() {
+        return "UserDto{" +
+            "username='" + username + '\'' +
+            ", email='" + email;
 
+    }
 }
