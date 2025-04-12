@@ -10,14 +10,11 @@ const UserRegistration = () => {
 
     const infoChange = (e) => {
         const {name, value} = e.target;
-        setFormData( (prev) => ({
-            ...prev,
-            [name]: value,
+        setFormData( (prev) => ({ ...prev, [name]: value
         }))
     }
 
     const submit = async () => {
-        console.log(formData);
     
         if (formData.password !== formData.confirmPassword) {
             alert("Passwords do not match");

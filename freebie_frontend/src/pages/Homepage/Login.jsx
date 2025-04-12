@@ -1,8 +1,42 @@
+import { useState } from 'react'
 import leftArrow from '../../assets/Homepage/leftArrow.png'
-
+import { useNavigate } from 'react-router-dom'
 const login = ( {setShowHome, setShowLogin} ) => {
+    const navigate = useNavigate()
+    const [form, setForm] = useState({
+        email: "",
+        password: ""
+    })
 
-    const submit = () => {
+    const handleInfoChange = (e) => {
+        const {name, value} = e.target;
+        setForm( prev => ({...prev, [name]: value
+        }))
+    }
+
+    const submit = async() => {
+        if(form.email === "" || form.password === ""){
+            alert("Must have both email and password")
+        }
+
+        const response = await fetch("http://localhost:8080/user/login", {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                "Content-Type": 'application/json'
+            },
+            body:JSON.stringify({
+                email: form.email,
+                password: form.password
+            })
+        });
+        
+        if(!response.ok){
+            throw new Error("Something went wrong")
+        }
+        else{
+            navigate("/dashboard")
+        }
 
     }
 
@@ -21,7 +55,10 @@ const login = ( {setShowHome, setShowLogin} ) => {
                     <input
                         id="email"
                         type="text"
+                        name='email'
+                        value={form.email}
                         className="flex-grow text-black border-2 border-indigo-400 rounded-3xl px-6 py-2 focus:outline-none focus:border-indigo-600"
+                        onChange={handleInfoChange}
                     />
                 </div>
 
@@ -31,11 +68,14 @@ const login = ( {setShowHome, setShowLogin} ) => {
                     <input
                         id="password"
                         type="password"
+                        name='password'
+                        value={form.password}
                         className="flex-grow text-black border-2 border-indigo-400 rounded-3xl px-6 py-2 focus:outline-none focus:border-indigo-600"
+                        onChange={handleInfoChange}
                     />
                 </div>
 
-                <button className="bg-cyan-400 text-white p-2 mb-2 rounded-md mt-2 w-24 hover:bg-cyan-300 border-2 hover:border-cyan-400 transition-colors duration-300 m-auto">
+                <button className="bg-cyan-400 text-white p-2 mb-2 rounded-md mt-2 w-24 hover:bg-cyan-300 border-2 hover:border-cyan-400 transition-colors duration-300 m-auto" type='submit' onClick={submit}>
                     Sign-In
                 </button>
             </div>

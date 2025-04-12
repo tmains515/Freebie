@@ -19,15 +19,18 @@ public class UserServices {
 
     public User RegisterNewUser(UserRegistrationDto userDto){
 
-        System.out.println(userDto.toString() + "<<<<");
-
         User user = new User();
         user.setUsername(userDto.getUsername());
         user.setEmail(userDto.getEmail());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         
-        System.out.println(user.toString() + "<<<<");
         return userRepo.save(user);
         
+    }
+
+
+    public String getUsername(User user){
+        User foundUser = userRepo.findByEmail(user.getEmail());
+        return foundUser.getUsername();
     }
 }

@@ -37,20 +37,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/user")
 public class UserController {
     
-    private final UserRepo userRepo;
-    private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
-    private final FreebieUserDetailsService freebieUserDetailsService;
     private final UserServices userServices;
 
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody UserRegistrationDto userDto){
-        System.out.println("<><><><><><><><>>");
         try {
             userServices.RegisterNewUser(userDto);    
         } catch (Exception e) {
-            System.out.println("Something went wrong <>><><<>");
+            System.out.println("Something went wrong");
         }
         return ResponseEntity.ok("Success");
     }
@@ -58,7 +54,9 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody User user) {
         try{
-            Authentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
+            String username = userServices.getUsername(user);
+
+            Authentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, user.getPassword()));
             SecurityContextHolder.getContext().setAuthentication(auth);
 
         }
