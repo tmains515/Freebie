@@ -5,7 +5,7 @@ import menu from '../../assets/Dashboard/menu.png'
 import { useState } from "react";
 import Filter from "../../Components/Filter";
 
-const UserDashboard = () => {
+const SearchDashboard = () => {
 
     const [showMenu, setShowMenu] = useState(false);
 
@@ -15,24 +15,6 @@ const UserDashboard = () => {
         location: "location",
         details: "details"
     }
-
-    const activeListings = async() => {
-        const request = await fetch('http://localhost:8080/user/test', {
-            method: "GET",
-            credentials: 'include',
-            headers: {
-                "Content-Type" : "application/json"
-            },
-
-        })
-        if(!request.ok){
-            console.log('Something went wrong')
-        }
-        const data = request.text()
-        console.log(data)
-    }
-
-
 
     return (
         <div className="bg-gradient-to-br from-indigo-600 to-cyan-200 min-h-screen flex flex-col w-screen justify-center">
@@ -83,14 +65,17 @@ const UserDashboard = () => {
         {/* Content */}
         <div className="grid grid-cols-16 grid-rows-10 mx-8 mt-2 rounded-4xl w-[calc(100vw-4rem)] h-[calc(100vh-6rem)] bg-[#ffffff]">
             
-
+            {/* Filter */}
+            <div className="flex bg-gradient-to-br col-span-3 row-span-7 ml-8 row-start-2 from-indigo-600 to-indigo-400 shadow-2xl m-4 w-full rounded-4xl justify-center">
+                <Filter/>
+            </div>
                 {/* Search */}
                 <div className="bg-gradient-to-br flex items-center pl-10 pr-2 gap-4 col-start-5 col-span-6 h-1/2 m-6 from-indigo-600 to-indigo-400 shadow-2xl rounded-4xl">
                     <label htmlFor="search" className="font-extrabold">Search:</label>
                     <input type="text"  className="bg-white h-3/4 rounded-4xl w-full text-black pl-4"/>
                 </div>
                 
-                {/* Search Button*/}
+                {/* Search */}
                 <button
                     className="
                     bg-gradient-to-br from-indigo-600 to-indigo-400
@@ -102,14 +87,14 @@ const UserDashboard = () => {
                     before:opacity-0 hover:before:opacity-100
                     before:transition-opacity before:duration-300
   "
-                    onClick={() => activeListings()}
+                    onClick={() => console.log('search')}
                 >
                     <span className="relative z-10 font-semibold text-white">Find</span>
                 </button>
-                <p className="text-indigo-600 italic font-sans font-semibold row-start-2 pt-10 pl-4 col-start-2 m-2 text-4xl text-nowrap">Your Listings</p>
+                <p className="text-indigo-600 italic font-sans font-semibold row-start-2 pt-10 pl-4 col-start-5 m-2 text-4xl text-nowrap">Your Listings</p>
 
                 {/* Listings */}
-            <div className="col-start-2 row-start-3 row-span-9 col-span-14 m-4 bg-gradient-to-br rounded-4xl from-indigo-600 to-indigo-400">
+            <div className="col-start-5 row-start-3 row-span-9 col-span-13 m-4 bg-gradient-to-br rounded-4xl from-indigo-600 to-indigo-400">
                 <ItemCard Item={dummyItem}/>
             </div>
         </div>
@@ -117,4 +102,4 @@ const UserDashboard = () => {
     )
 }
 
-export default UserDashboard;
+export default SearchDashboard;

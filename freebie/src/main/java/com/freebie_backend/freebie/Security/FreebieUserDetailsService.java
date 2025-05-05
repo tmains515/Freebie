@@ -19,10 +19,15 @@ public class FreebieUserDetailsService implements UserDetailsService{
     private final UserRepo userRepo;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
-        return userRepo.findById(username)
-                .map(user -> new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), Collections.emptyList()))
-                .orElseThrow( () -> new UsernameNotFoundException("Username not found: " + username));
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userRepo.findByUsername(username) 
+                .map(user -> new org.springframework.security.core.userdetails.User(
+                        user.getUsername(),
+                        user.getPassword(),
+                        Collections.emptyList()
+                ))
+                .orElseThrow(() -> new UsernameNotFoundException("Username not found: " + username));
     }
+    
 
 }

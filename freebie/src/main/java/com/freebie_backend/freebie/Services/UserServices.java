@@ -4,18 +4,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.freebie_backend.freebie.DTOs.LoginRequest;
 import com.freebie_backend.freebie.DTOs.UserRegistrationDto;
 import com.freebie_backend.freebie.Models.User;
 import com.freebie_backend.freebie.Repositories.UserRepo;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class UserServices {
 
-    @Autowired
-    private UserRepo userRepo;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final UserRepo userRepo;
+    private final PasswordEncoder passwordEncoder;
 
     public User RegisterNewUser(UserRegistrationDto userDto){
 
@@ -29,7 +30,7 @@ public class UserServices {
     }
 
 
-    public String getUsername(User user){
+    public String getUsername(LoginRequest user){
         User foundUser = userRepo.findByEmail(user.getEmail());
         return foundUser.getUsername();
     }

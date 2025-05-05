@@ -24,6 +24,7 @@ public class Spring_Security_Config {
 
     @Autowired
     FreebieUserDetailsService freebieUserDetailsService;
+    
     @Autowired
     UserDetailsService userDetailsService;
 

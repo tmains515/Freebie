@@ -10,14 +10,28 @@ import jakarta.persistence.Table;
 public class User {
 
     @Id
+    @Column(name = "userid")
+    private Integer userId;
+
     @Column(name = "username")
     private String username;
     
     @Column(name = "user_email", nullable = false)
     private String email;
-    
+
+
     @Column(name = "password", nullable = false)
     private String password;
+
+    
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
 
     public String getUsername() {
         return username;
