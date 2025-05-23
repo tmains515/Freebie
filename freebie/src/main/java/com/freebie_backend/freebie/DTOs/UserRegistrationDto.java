@@ -4,6 +4,8 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+
+// Not really using a Dto?
 public class UserRegistrationDto {
     @NotBlank
     @Size(min = 3, max = 50)

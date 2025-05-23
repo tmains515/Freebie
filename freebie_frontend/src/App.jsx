@@ -6,6 +6,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom"
 import Login from './pages/Homepage/Login'
 import UserDashboard from './pages/Dashboard/UserDashboard'
 import UserProfile from './pages/User/UserProfile'
+import NewListing from './Components/NewListing'
 import './App.css'
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
 			<Route path="/" element={ <Homepage/> }/>
 			<Route path='/dashboard' element={<UserDashboard/>}/>
 			<Route path='/profile' element={<UserProfile/>}/>
+			<Route path='/new_listing' element={<NewListing/>}/>
 		</Routes>
 	</BrowserRouter>
 	)

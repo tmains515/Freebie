@@ -18,13 +18,8 @@ public class UserServices {
     private final UserRepo userRepo;
     private final PasswordEncoder passwordEncoder;
 
-    public User RegisterNewUser(UserRegistrationDto userDto){
-
-        User user = new User();
-        user.setUsername(userDto.getUsername());
-        user.setEmail(userDto.getEmail());
-        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        
+    public User RegisterNewUser(User user){
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepo.save(user);
         
     }

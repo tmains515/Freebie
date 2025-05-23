@@ -1,6 +1,6 @@
 import leftArrow from "../../assets/Homepage/leftArrow.png"
 import { useState } from "react";
-const UserRegistration = () => {
+const UserRegistration = ({setShowHome, setShowRegister}) => {
     const [formData, setFormData] = useState({
         username: "",
         password: "",
@@ -40,7 +40,7 @@ const UserRegistration = () => {
                 throw new Error(`Server Error: ${response.status} - ${errorText}`);
             }
     
-            const data = await response.text(); // or response.json() if your backend returns JSON
+            const data = await response.text();
             console.log("Registration successful:", data);
             alert("Registration successful!");
     
@@ -57,7 +57,7 @@ const UserRegistration = () => {
 
             <div className="bg-gray-100 flex flex-col rounded-lg shadow-lg w-full max-w-lg mb-10 gap-4">
                 <button className="w-8 h-8 relative left-0 m-1 top-0 transition duration-300 hover:shadow-lg hover:shadow-cyan-400 rounded-full" onClick={() => {setShowHome(true), setShowLogin(false)}}>
-                    <img src={leftArrow} alt=""/>
+                    <img src={leftArrow} alt="" onClick={() => {setShowHome(true), setShowRegister(false)}}/>
                 </button>
 
                 {/* First Name Field */}

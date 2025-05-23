@@ -1,44 +1,13 @@
-import user from "../../assets/Dashboard/user_default.png"
-import { Link, useNavigate } from "react-router-dom";
-import ItemCard from "../../Components/ItemCard";
-import menu from '../../assets/Dashboard/menu.png'
-import { useState } from "react";
-import Filter from "../../Components/Filter";
-import Header from "../../Components/Header";
-const UserDashboard = () => {
 
-    const dummyItem = {
-        title: "test",
-        categories: "categories",
-        location: "location",
-        details: "details"
-    }
-
-    const activeListings = async() => {
-        const request = await fetch('http://localhost:8080/user_listings/currentListings', {
-            method: "GET",
-            credentials: 'include',
-            headers: {
-                "Content-Type" : "application/json"
-            },
-
-        })
-        if(!request.ok){
-            console.log('Something went wrong')
-        }
-        const data = request.text()
-    }
-
-
-
+const NewListing = () => {
     return (
         <div className="bg-gradient-to-br from-indigo-600 to-cyan-200 min-h-screen flex flex-col w-screen justify-center">
 
-        <Header/>
-
+        
         {/* Content */}
         <div className="grid grid-cols-16 grid-rows-10 mx-8 mt-2 rounded-4xl w-[calc(100vw-4rem)] h-[calc(100vh-6rem)] bg-[#ffffff]">
             
+
                 {/* Search */}
                 <div className="bg-gradient-to-br flex items-center pl-10 pr-2 gap-4 col-start-5 col-span-6 h-1/2 m-6 from-indigo-600 to-indigo-400 shadow-2xl rounded-4xl">
                     <label htmlFor="search" className="font-extrabold">Search:</label>
@@ -65,11 +34,10 @@ const UserDashboard = () => {
 
                 {/* Listings */}
             <div className="col-start-2 row-start-3 row-span-9 col-span-14 m-4 bg-gradient-to-br rounded-4xl from-indigo-600 to-indigo-400">
-                <ItemCard Item={dummyItem}/>
+                
             </div>
         </div>
       </div>
     )
 }
-
-export default UserDashboard;
+export default NewListing

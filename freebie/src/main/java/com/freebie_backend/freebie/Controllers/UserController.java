@@ -51,11 +51,12 @@ public class UserController {
     
 
     // TODO: Move all of this to AuthController instead of login
-
+    // Not really transfering USER to a DTO?
+    
     @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@RequestBody UserRegistrationDto userDto){
+    public ResponseEntity<?> registerUser(@RequestBody User user){
         try {
-            userServices.RegisterNewUser(userDto);    
+            userServices.RegisterNewUser(user);    
         } catch (Exception e) {
             System.out.println("Something went wrong");
         }
@@ -78,6 +79,7 @@ public class UserController {
             SecurityContext context = SecurityContextHolder.getContext();
             context.setAuthentication(auth);
 
+            // Save Security Context
             HttpSessionSecurityContextRepository repo = new HttpSessionSecurityContextRepository();
             repo.saveContext(context, httpRequest, httpResponse);
 
