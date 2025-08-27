@@ -2,17 +2,19 @@ import user from "../../assets/Dashboard/user_default.png"
 import { Link, useNavigate } from "react-router-dom";
 import ItemCard from "../../Components/ItemCard";
 import menu from '../../assets/Dashboard/menu.png'
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import Filter from "../../Components/Filter";
 import Header from "../../Components/Header";
 const UserDashboard = () => {
-
+    const [usersListings, setUsersListings] = useState([]);
+    const [update, setUpdate] = useState(false);
     const dummyItem = {
         title: "test",
         categories: "categories",
         location: "location",
         details: "details"
     }
+
 
     const activeListings = async() => {
         const request = await fetch('http://localhost:8080/user_listings/currentListings', {
@@ -26,9 +28,15 @@ const UserDashboard = () => {
         if(!request.ok){
             console.log('Something went wrong')
         }
-        const data = request.text()
+        const data = await request.json()
+        console.log(data)
+        setUsersListings(data)
+
     }
 
+    useEffect(() => {
+        activeListings()
+    }, [])
 
 
     return (
@@ -64,9 +72,15 @@ const UserDashboard = () => {
                 <p className="text-indigo-600 italic font-sans font-semibold row-start-2 pt-10 pl-4 col-start-2 m-2 text-4xl text-nowrap">Your Listings</p>
 
                 {/* Listings */}
-            <div className="col-start-2 row-start-3 row-span-9 col-span-14 m-4 bg-gradient-to-br rounded-4xl from-indigo-600 to-indigo-400">
-                <ItemCard Item={dummyItem}/>
-            </div>
+                <div className="col-start-2 row-start-3 row-span-9 col-span-14 m-4 bg-gradient-to-br rounded-4xl from-indigo-600 to-indigo-400">
+                    {usersListings ? usersListings.map( (listing, index) => {
+                        return <ItemCard Item={listing} key={index}/>
+                    })
+                        :
+                        <p>Loading...</p>
+                    }
+
+                </div>
         </div>
       </div>
     )

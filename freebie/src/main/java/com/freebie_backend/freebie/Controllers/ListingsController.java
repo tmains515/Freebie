@@ -42,10 +42,8 @@ public class ListingsController {
 
         if (user.isEmpty()){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.emptyList());
-
         }
             List<ListingDto> listings = listingsServices.getUsersListings(user.get());
-
             return ResponseEntity.ok(listings);
     }
     
@@ -55,7 +53,7 @@ public class ListingsController {
         Object principal = auth.getPrincipal();
 
         if (principal instanceof UserDetails userDetails) {
-            System.out.println(userDetails.getUsername());
+
             return ResponseEntity.ok("Logged in as: " + userDetails.getUsername());
         }
         return ResponseEntity.ok("Principal: " + principal.toString());

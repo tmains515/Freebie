@@ -2,6 +2,7 @@ package com.freebie_backend.freebie.Security;
 
 import java.util.Collections;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -14,8 +15,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class FreebieUserDetailsService implements UserDetailsService{
-    
-    
+
     private final UserRepo userRepo;
 
     @Override

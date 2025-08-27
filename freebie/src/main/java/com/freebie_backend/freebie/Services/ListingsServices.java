@@ -25,18 +25,19 @@ public class ListingsServices {
 
         // Find all user listings and make new list for transfering to DTO
         List<Listing> listings = listingsRepo.findByUserId(user);
+        for(Listing l : listings){
+            System.out.println(l);
+        }
         List<ListingDto> listingsDto = new ArrayList<ListingDto>();
-        System.out.println("<><><><>HERE" + listings);
-
         if(listings.isEmpty()){
             return null;
         }
+
 
         // Place each listing into a DTO
         for (Listing listing : listings) {
             listingsDto.add(ListingMapper.toDto(listing));
         }
-
         return listingsDto;
     }
 }

@@ -9,9 +9,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
 import jakarta.persistence.OneToOne;
+import lombok.Data;
 
 @Entity
 @Table(name = "current_listings")
+@Data
 public class Listing {
 
     @Id
@@ -35,54 +37,6 @@ public class Listing {
     @JoinColumn(name = "user_id")
     private User userId;
 
-    public int getListingId() {
-        return listingId;
-    }
-
-    public void setListingId(int listingId) {
-        this.listingId = listingId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-
-    public int getCategory_id() {
-        return category_id;
-    }
-
-    public void setCategory_id(int category_id) {
-        this.category_id = category_id;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public String getDetails() {
-        return details;
-    }
-
-    public void setDetails(String details) {
-        this.details = details;
-    }
-
-    public User getUserId() {
-        return this.userId;
-    }
-
-    public void setUser(User userId) {
-        this.userId = userId;
-    }
 
     
 }

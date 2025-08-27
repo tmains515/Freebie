@@ -9,6 +9,9 @@ public class ListingDto {
     private String location;
     private String details;
 
+
+    // Map for categories
+
     
     public int getListingId() {
         return listingId;
@@ -42,4 +45,15 @@ public class ListingDto {
         this.category_id = category_id;
     }
 
+
+    @Override
+    public String toString() {
+        return "ListingDto{" +
+                "listingId=" + listingId +
+                ", title='" + title + '\'' +
+                ", category_id=" + category_id +
+                ", location='" + location + '\'' +
+                ", details='" + details + '\'' +
+                '}';
+    }
 }
